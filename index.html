@@ -1,0 +1,72 @@
+<!-- html generated using html:5 emmet template -->
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp"> <!-- refer to your module name -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Angular example</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- angular.js downloaded from angularjs.org and our app.js -->
+  <script src="angular.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="MyController"> <!-- refer to your controller name -->
+
+  <h1>Angular example</h1>
+
+  <section>
+    <!-- ng-src avoids browser errors with images -->
+    <img ng-src="{{ book.image }}" alt="cover">
+    <div class="details">
+      <!-- curly braces to read $scope data, like $scope.book here -->
+      <header>Title: {{ book.title }}</header>
+      <p>Author: {{ book.author }}</p>
+      <p>Year: {{ book.year }}</p>
+    </div>
+  </section>
+
+  <section>
+    <form>
+      <!-- ng-model to set $scope data from the view (html) -->
+      <p>Title: <input ng-model="newBook.title"></p>
+      <p>Author: <input ng-model="newBook.author"></p>
+      <p>Year: <input ng-model="newBook.year"></p>
+      <p>Fiction: <input type="checkbox" ng-model="newBook.fiction"></p>
+      <!-- ng-click calls a $scope function when the element is clicked -->
+      <button ng-click="addBook()">Add</button>
+    </form>
+  </section>
+
+  <div class="list">
+    <header>Books</header>
+    <!-- ng-repeat repeats the HTML element for each item in the array -->
+    <section ng-repeat="b in books">
+      <!-- ng-show displays the HTML element if the condition is true (or truthy) -->
+      <img ng-show="b.image" ng-src="{{ b.image }}" alt="cover">
+      <div class="details">
+        <header>Title: {{ b.title }}</header>
+        <p>Author: {{ b.author_name }}</p>
+        <p>Year: {{ b.first_publish_year }}</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="list">
+    <header>Books from API</header>
+    <!-- ng-hide hides the HTML element if the condition is true (or truthy) -->
+    <div ng-hide="booksFromApi">LOADING...</div>
+    <!-- ng-repeat repeats the HTML element for each item in the array -->
+    <section ng-repeat="b in booksFromApi">
+      <img ng-show="b.cover_i" ng-src="http://covers.openlibrary.org/b/id/{{b.cover_i}}-M.jpg" alt="cover">
+      <div class="details">
+        <header>Title: {{ b.title }}</header>
+        <p>Author: {{ b.author_name }}</p>
+        <p>Year: {{ b.first_publish_year }}</p>
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
